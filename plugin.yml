@@ -2,7 +2,7 @@ name: KOTH-Jay
 author: Jay
 description: Simple KOTH Event Plugin
 version: 0.400000
-main: koth\KothMain
+main: koth/KothMain
 api:
 - 3.0.0
 - 3.0.0-ALPHA5
