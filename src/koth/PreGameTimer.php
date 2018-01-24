@@ -23,7 +23,7 @@ class PreGameTimer extends PluginTask
         $this->plugin = $owner;
     }
 
-    public function onRun($currentTick)
+    public function onRun(int $currentTick)
     {
         $msg = $this->plugin->getData("starting");
         $msg = str_replace("{sec}",$this->time,$msg);
