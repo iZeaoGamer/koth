@@ -23,7 +23,7 @@ class KothCommand extends Command
         $this->plugin = $main;
     }
 
-    public function execute(CommandSender $sender, $commandLabel, array $args){
+    public function execute(CommandSender $sender, string $commandLabel, array $args): bool{
         if ($sender instanceof Player){
             if (isset($args[0])){
                 if (strtolower($args[0]) === "join"){
