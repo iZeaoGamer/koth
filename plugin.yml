@@ -1,10 +1,7 @@
-name: KOTH-Jay
-author: Jay
+name: VM-Koth
+author: VMPE Development Team
 description: Simple KOTH Event Plugin
-version: 0.400000
+version: 1.0.0-BETA
 main: koth/KothMain
 api:
-- 3.0.0
-- 3.0.0-ALPHA5
-- 3.0.0-ALPHA8
-- 3.0.0-ALPHA9
+- 3.0.0-ALPHA10
