@@ -5,24 +5,18 @@
  * Date: 6/22/17
  * Time: 12:22 PM
  */
-
 namespace koth;
-
-
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\Player;
-
 class KothCommand extends Command
 {
     private $plugin;
-
     public function __construct($name, KothMain $main)
     {
         parent::__construct($name, "");
         $this->plugin = $main;
     }
-
     public function execute(CommandSender $sender, string $commandLabel, array $args): bool{
         if ($sender instanceof Player){
             if (isset($args[0])){
@@ -68,7 +62,6 @@ class KothCommand extends Command
                     }else{
                         $sender->sendMessage("No KOTH Arena fully setup...");
                     }
-
                 } else{
                     if ($sender->isOp()) $this->sendHelp($sender);
                     if (!$sender->isOp()) $sender->sendMessage($this->plugin->prefix()."Join game with /koth join");
@@ -77,7 +70,6 @@ class KothCommand extends Command
                 if ($sender->isOp()) $this->sendHelp($sender);
                 if (!$sender->isOp()) $sender->sendMessage($this->plugin->prefix()."Join game with /koth join");
             }
-
         }else{
             if (isset($args[0])){
                 if (strtolower($args[0]) === "start"){
@@ -98,10 +90,9 @@ class KothCommand extends Command
             }
             $sender->sendMessage("Error- Cant run that in console!");
         }
-
         return true;
     }
-
+    }
     public function sendHelp(CommandSender $sender){
         $sender->sendMessage("---KOTH Commands---");
         $sender->sendMessage("Make sure to run first 3 commands to fully setup Arena");
@@ -112,7 +103,4 @@ class KothCommand extends Command
         $sender->sendMessage("/koth stop - force stop KOTH Math");
         $sender->sendMessage("Reload server or restart to setup Arena fully!");
     }
-
-
 }
-
