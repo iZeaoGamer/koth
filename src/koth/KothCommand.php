@@ -28,7 +28,7 @@ class KothCommand extends Command
                         $sender->sendMessage($this->plugin->getData("not_running"));
                     }
                     return true;
-                }else if (strtolower($args[0]) === "leave")
+                }elseif (strtolower($args[0]) === "leave") return true;
                     if($this->plugin->removePlayer($sender)){
                        $sender->sendMessage($this->plugin->getData("left"));
                        return true;
