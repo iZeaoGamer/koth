@@ -14,7 +14,7 @@ class PreGameTimer extends Task
 {
     private $arena;
     private $plugin;
-    private $time = 30;
+    private $time = 100;
 
     public function __construct(KothMain $owner, KothArena $arena)
     {
@@ -27,7 +27,7 @@ class PreGameTimer extends Task
         $msg = $this->plugin->getData("starting");
         $msg = str_replace("{sec}",$this->time,$msg);
         $msg = $this->plugin->prefix().$msg;
-        if ($this->time == 30 || $this->time == 15 || $this->time < 6){
+        if ($this->time == 100 || $this->time == 60 || $this->time == 30 || $this->time == 15 || $this->time == 10 || $this->time < 6){
             $this->plugin->getServer()->broadcastMessage($msg);
         }
         $this->time--;
@@ -37,7 +37,7 @@ class PreGameTimer extends Task
             $this->getHandler()->cancel();
         }
 
-        $this->arena->sendPopup("Gaming Starting in.. ".$this->time);
+        $this->arena->sendPopup("§dGaming Starting in.. §5".$this->time);
     }
 
 }
