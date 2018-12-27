@@ -5,23 +5,16 @@
  * Date: 6/22/17
  * Time: 9:49 AM
  */
-
 namespace koth;
-
-
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
-
 class KothMain extends PluginBase
 {
     private $msg;
     private $c;
-
     private $arena = null;
-
     private $fac;
-
     public function onEnable(){
         @mkdir($this->getDataFolder());
         $this->msg = new Config($this->getDataFolder()."config.yml",Config::YAML,[
@@ -47,47 +40,35 @@ class KothMain extends PluginBase
                 "give {player} diamond 2"
         ]
         ]);
-
         $this->c = new Config($this->getDataFolder()."arena.yml", Config::YAML);
         $this->getLogger()->notice("KOTH Plugin Enabled!");
-
         $all = $this->c->getAll();
         if (isset($all["spawns"]) && $all["p1"] && $all["p2"]){
-            $this->arena = new KothArena($this,$all["spawns"],"p1" => $all["p1"], "p2" => $all["p2"]]);
+            $this->arena = new KothArena($this,$all["spawns"],["p1" => $all["p1"], "p2" => $all["p2"]]);
             $this->getLogger()->info("KOTH Arena Loaded Successfully");
         }else{
             $this->getLogger()->alert("No arena setup! Please set one up!");
         }
-
-
         //Register Listener
         $this->getServer()->getPluginManager()->registerEvents(new KothListener($this),$this);
-
         //Register Command
         $this->getServer()->getCommandMap()->register("koth", new KothCommand("koth",$this));
-
-
         $this->fac = $this->getServer()->getPluginManager()->getPlugin("FactionsPro");
         if ($this->fac == null) $this->getLogger()->critical("FactionsPro Plugin not found... Disabled {faction} support!");
     }
-
     public function getFaction(Player $player){
         return $this->fac == null ? "" : $this->fac->getPlayerFaction($player->getName());
     }
-
     public function onDisable(){
         $arena = $this->arena;
         if ($arena instanceof KothArena){
             $arena->resetGame();
         }
     }
-
     public function getRewards() : array {
         $all = $this->msg->getAll();
         return isset($all["rewards"]) ? $all["rewards"] : [];
     }
-
-
     public function setPoint(Player $player, $type){
         $save = $player->getX().":".$player->getY().":".$player->getZ().":".$player->getLevel()->getName();
         $all = $this->c->getAll();
@@ -99,7 +80,6 @@ class KothMain extends PluginBase
         $this->c->setAll($all);
         $this->c->save();
     }
-
     public function startArena() : bool {
         $arena = $this->arena;
         if ($arena instanceof KothArena) {
@@ -108,7 +88,6 @@ class KothMain extends PluginBase
         }
         return false;
     }
-
     public function forceStop() : bool {
         $arena = $this->arena;
         if ($arena instanceof KothArena) {
@@ -117,7 +96,6 @@ class KothMain extends PluginBase
         }
         return false;
     }
-
     public function isRunning() : bool {
         $arena = $this->arena;
         if ($arena instanceof KothArena) {
@@ -125,7 +103,6 @@ class KothMain extends PluginBase
         }
         return false;
     }
-
     public function sendToKoth($player) : bool {
         $arena = $this->arena;
         if ($arena instanceof KothArena) {
@@ -136,12 +113,10 @@ class KothMain extends PluginBase
         }
         return false;
     }
-
     public function prefix() : string {
         $all = $this->msg->getAll();
         return isset($all["prefix"]) ? $all["prefix"] : "[KOTH] ";
     }
-
     public function removePlayer($player){
         $arena = $this->arena;
         if ($arena instanceof KothArena) {
@@ -149,10 +124,8 @@ class KothMain extends PluginBase
         }
         return false;
     }
-
     public function getData($type) : string {
         $all = $this->msg->getAll();
         return isset($all[$type]) ? $all[$type] : "";
     }
-
 }
