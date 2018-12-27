@@ -30,17 +30,17 @@ class KothArena
 
     private $timer = null;
 
-    public function __construct(KothMain $main, $spawns, $capture)
+    public function __construct(KothMain $main, float $spawns, float $capture)
     {
         $this->plugin = $main;
         foreach ($spawns as $spawn){
-            $l = explode(":",$spawn);
+            $l = explode(":",(float) $spawn);
             $l = new Position($l[0],$l[1],$l[2],$main->getServer()->getLevelByName($l[3]));
             $this->spawns[] = $l;
         }
-        $l = explode(":",$capture["p1"]);
+        $l = explode(":",(float) $capture["p1"]);
         $this->p1 = new Position($l[0],$l[1],$l[2],$main->getServer()->getLevelByName($l[3]));
-        $l = explode(":",$capture["p2"]);
+        $l = explode(":",(float) $capture["p2"]);
         $this->p2 = new Position($l[0],$l[1],$l[2],$main->getServer()->getLevelByName($l[3]));
     }
 
