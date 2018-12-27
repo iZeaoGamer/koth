@@ -32,6 +32,8 @@ class KothMain extends PluginBase
             "starting" => "Game starting in {sec}. Join Game now! (/koth join)",
             "begin" => "KOTH Started! (/koth join)",
             "joined" => "Joined game successfully!, Be the first to capture the area now!",
+            "left" => "Left the KOTH succesfully!",
+            "not_in_game" => "You're not in a koth game.",
             "win" => "{faction} | {player} has captured the area and won the event!",
             "end" => "Event has ended!",
             "not_running" => "There is no KOTH event running at the moment!",
