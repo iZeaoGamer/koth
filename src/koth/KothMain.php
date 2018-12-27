@@ -51,7 +51,7 @@ class KothMain extends PluginBase
 
         $all = $this->c->getAll();
         if (isset($all["spawns"]) && $all["p1"] && $all["p2"]){
-            $this->arena = new KothArena($this,$all["spawns"],["p1" => $all["p1"], "p2" => $all["p2"]]);
+            $this->arena = new KothArena($this,$all[(float)"spawns"],"p1" => $all[(float)"p1"], "p2" => $all[(float)"p2"]]);
             $this->getLogger()->info("KOTH Arena Loaded Successfully");
         }else{
             $this->getLogger()->alert("No arena setup! Please set one up!");
