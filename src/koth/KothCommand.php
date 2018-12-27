@@ -88,7 +88,7 @@ class KothCommand extends Command
                     return true;
                 }
             }
-            $sender->sendMessage("Error- Cant run that in console!");
+            $sender->sendMessage("§aKoth help\n§b/koth join - §7Joins a koth game - Keep in mind: This will kick you from the game, as it's a glitch. But don't worry! It'll still detect that you're still in a game.\n§b/koth leave - §7Leaves the KOTH Game.");
         }
         return true;
     }
