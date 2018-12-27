@@ -23,6 +23,7 @@ class KothCommand extends Command
                 if (strtolower($args[0]) === "join"){
                     if ($this->plugin->sendToKoth($sender)){
                         $sender->sendMessage($this->plugin->getData("joined"));
+                        $sender->transfer($this->plugin->getData("transfer"));
                         $this->plugin->getServer()->broadcastMessage("§5$sender->getName() §dhas joined KOTH. Game will be starting shortly..");
                         return true;
                     }else{
