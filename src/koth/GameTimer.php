@@ -9,9 +9,9 @@
 namespace koth;
 
 
-use pocketmine\scheduler\PluginTask;
+use pocketmine\scheduler\Task;
 
-class GameTimer extends PluginTask
+class GameTimer extends Task
 {
     private $plugin;
     private $arena;
@@ -19,7 +19,6 @@ class GameTimer extends PluginTask
     private $time;
 
     public function __construct(KothMain $owner, KothArena $arena){
-        parent::__construct($owner);
         $this->plugin = $owner;
         $this->arena = $arena;
 
