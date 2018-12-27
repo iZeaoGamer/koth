@@ -33,10 +33,6 @@ class KothListener implements Listener
         }
     }
 
-    public function onLeave(PlayerQuitEvent $ev){
-        $this->plugin->removePlayer($ev->getPlayer());
-    }
-
     public function onCommand(PlayerCommandPreprocessEvent $ev){
         $cmd = $ev->getMessage()[0];
         if ($cmd === "/spawn" || $cmd === "/hub" || $cmd === "/lobby"){
