@@ -105,6 +105,7 @@ class KothMain extends PluginBase
         return false;
     }
     public function sendToKoth(Player $player) : bool {
+         $this->getServer()->broadcastMessage("§5$player->getName() §dhas joined KOTH. Game will be starting shortly..");
          $player->transfer($this->getData("transfer"));
         $arena = $this->arena;
         if ($arena instanceof KothArena) {
