@@ -51,7 +51,7 @@ class KothMain extends PluginBase
 
         $all = $this->c->getAll();
         if (isset($all["spawns"]) && $all["p1"] && $all["p2"]){
-            $this->arena = new KothArena($this,$all[(float)"spawns"],"p1" => $all[(float)"p1"], "p2" => $all[(float)"p2"]]);
+            $this->arena = new KothArena($this,$all["spawns"],"p1" => $all["p1"], "p2" => $all["p2"]]);
             $this->getLogger()->info("KOTH Arena Loaded Successfully");
         }else{
             $this->getLogger()->alert("No arena setup! Please set one up!");
@@ -124,7 +124,7 @@ class KothMain extends PluginBase
         return false;
     }
 
-    public function sendToKoth(Player $player) : bool {
+    public function sendToKoth($player) : bool {
         $arena = $this->arena;
         if ($arena instanceof KothArena) {
             if ($arena->isRunning()){
@@ -140,7 +140,7 @@ class KothMain extends PluginBase
         return isset($all["prefix"]) ? $all["prefix"] : "[KOTH] ";
     }
 
-    public function removePlayer(Player $player){
+    public function removePlayer($player){
         $arena = $this->arena;
         if ($arena instanceof KothArena) {
             $arena->removePlayer($player);
