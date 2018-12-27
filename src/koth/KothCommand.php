@@ -28,7 +28,7 @@ class KothCommand extends Command
                         $sender->sendMessage($this->plugin->getData("not_running"));
                     }
                     return true;
-                } else if (strtolower($args[0]) === "leave"){
+                }else if (strtolower($args[0]) === "leave")
                     if($this->plugin->removePlayer($sender)){
                        $sender->sendMessage($this->plugin->getData("left"));
                        return true;
@@ -85,7 +85,6 @@ class KothCommand extends Command
                     return true;
                 }
             }
-        }
             $sender->sendMessage("Error- Cant run that in console!");
         }
         return true;
