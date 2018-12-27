@@ -4,4 +4,4 @@ description: Simple KOTH Event Plugin
 version: 1.0.0-BETA
 main: koth\KothMain
 api:
-- 3.0.0-ALPHA10
+- 3.0.0
