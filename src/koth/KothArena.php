@@ -51,12 +51,12 @@ class KothArena
         $y = $l->getY();
         $p1 = $this->p1;
         $p2= $this->p2;
-        $minx = min($p1->getX(),$p2->getX());
-        $maxx = max($p1->getX(),$p2->getX());
-        $minz = min($p1->getZ(),$p2->getZ());
-        $maxz = max($p1->getZ(),$p2->getZ());
-        $miny = min($p1->getY(),$p2->getY());
-        $maxy = max($p1->getY(),$p2->getY());
+        $minx = (float)min($p1->getX(),$p2->getX());
+        $maxx = (float)max($p1->getX(),$p2->getX());
+        $minz = (float)min($p1->getZ(),$p2->getZ());
+        $maxz = (float)max($p1->getZ(),$p2->getZ());
+        $miny = (float)min($p1->getY(),$p2->getY());
+        $maxy = (float)max($p1->getY(),$p2->getY());
         return ($minx <= $x && $x <= $maxx && $minz <= $z && $z <= $maxz && $miny <= $y && $y <= $maxy);
     }
 
