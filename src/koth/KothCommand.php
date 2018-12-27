@@ -92,6 +92,7 @@ class KothCommand extends Command
         }
         return true;
     }
+    return true;
     }
     public function sendHelp(CommandSender $sender){
         $sender->sendMessage("---KOTH Commands---");
