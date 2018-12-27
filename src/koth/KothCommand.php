@@ -34,6 +34,14 @@ class KothCommand extends Command
                         $sender->sendMessage($this->plugin->getData("not_running"));
                     }
                     return true;
+                } else if (strtolower($args[0]) === "leave"){
+                    if($this->plugin->removePlayer($sender)){
+                       $sender->sendMessage($this->plugin->getData("left"));
+                       return true;
+                       } else {
+                           $sender->sendMessage($this->plugin->getData("not_in_game"));
+                           return true;
+                       }
                 } else if (strtolower($args[0]) === "setspawn"){
                     if (!$sender->hasPermission("koth.start")) return true;
                     $this->plugin->setPoint($sender,"spawn");
@@ -108,3 +116,4 @@ class KothCommand extends Command
 
 
 }
+
