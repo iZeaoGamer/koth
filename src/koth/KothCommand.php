@@ -38,10 +38,9 @@ class KothCommand extends Command
                     if($this->plugin->removePlayer($sender)){
                        $sender->sendMessage($this->plugin->getData("left"));
                        return true;
-                       } else {
-                           $sender->sendMessage($this->plugin->getData("not_in_game"));
-                           return true;
-                       }
+                    } else if (strtolower($args[0]) === "help"){
+                        $sender->sendMessage("§aKoth help\n§b/koth join - §7Joins a koth game - Keep in mind: This will kick you from the game, as it's a glitch. But don't worry! It'll still detect that you're still in a game.\n§b/koth leave - §7Leaves the KOTH Game.");
+                        return true;
                 } else if (strtolower($args[0]) === "setspawn"){
                     if (!$sender->hasPermission("koth.start")) return true;
                     $this->plugin->setPoint($sender,"spawn");
