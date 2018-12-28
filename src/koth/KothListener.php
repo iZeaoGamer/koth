@@ -30,6 +30,7 @@ class KothListener implements Listener
         if ($this->plugin->isRunning()){
             $p = $ev->getPlayer();
             $p->addTitle($this->plugin->getData("still_running_title"),$this->plugin->getData("still_running_sub"));
+             $this->plugin->arena->sendRandomSpot($p);
         }
     }
 
