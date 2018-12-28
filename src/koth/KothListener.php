@@ -11,11 +11,10 @@ namespace koth;
 
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerCommandPreprocessEvent;
-use pocketmine\event\player\PlayerQuitEvent;
+use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerRespawnEvent;
 
-class KothListener implements Listener
-{
+class KothListener implements Listener{
 
     private $plugin;
 
@@ -33,7 +32,13 @@ class KothListener implements Listener
              $this->plugin->arena->sendRandomSpot($p);
         }
     }
-
+    public function onJoin(PlayerJoinEvent $event){
+        if($this->plugin->isRunning() === true){
+        if($this->plugin->addPlayer($event->getPlayer)){
+            $this->plugin->arena->sendRandomSpot($event->getPlayer);
+        }
+    }
+    }
     public function onCommand(PlayerCommandPreprocessEvent $ev){
         $cmd = $ev->getMessage()[0];
         if ($cmd === "/spawn" || $cmd === "/hub" || $cmd === "/lobby"){
