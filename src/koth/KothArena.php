@@ -77,9 +77,8 @@ class KothArena
 
 
     public function addPlayer(Player $player){
-        $this->plugin->getServer()->broadcastMessage("§5$player->getName() §dhas joined KOTH. Game will be starting shortly..");
+         $this->sendRandomSpot($player);
         $this->players[$player->getName()] = $this->plugin->getData("capture_time");
-        $this->sendRandomSpot($player);
     }
 
     public function sendRandomSpot(Player $player){
