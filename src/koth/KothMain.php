@@ -15,7 +15,10 @@ class KothMain extends PluginBase
     private $c;
     private $arena = null;
     private $fac;
+    private static $instance;
+    
     public function onEnable(){
+        self::$instance = $this;
         @mkdir($this->getDataFolder());
         $this->msg = new Config($this->getDataFolder()."config.yml",Config::YAML,[
             "capture_time" => 100,
@@ -57,6 +60,8 @@ class KothMain extends PluginBase
         $this->fac = $this->getServer()->getPluginManager()->getPlugin("FactionsPro");
         if ($this->fac == null) $this->getLogger()->critical("FactionsPro Plugin not found... Disabled {faction} support!");
     }
+    public static function getInstance() : self{
+        return self::$instance;
     public function getFaction(Player $player){
         return $this->fac == null ? "" : $this->fac->getPlayerFaction($player->getName());
     }
