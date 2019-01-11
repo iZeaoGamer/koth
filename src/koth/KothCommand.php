@@ -86,13 +86,11 @@ class KothCommand extends Command
                     return true;
                 }
             }
-           if($sender instanceof Player){
                $this->sendHelp($sender);
                return true;
         }
         return true;
             }
-    }
     public function sendHelp(CommandSender $sender){
         $sender->sendMessage("---KOTH Commands---");
         $sender->sendMessage("Make sure to run first 3 commands to fully setup Arena");
