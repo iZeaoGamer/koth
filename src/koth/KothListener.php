@@ -29,13 +29,13 @@ class KothListener implements Listener{
         if ($this->plugin->isRunning()){
             $p = $ev->getPlayer();
             $p->addTitle($this->plugin->getData("still_running_title"),$this->plugin->getData("still_running_sub"));
-             $this->plugin->arena->sendRandomSpot($p);
+             KothMain::getInstance()->getPlugin()->sendRandomSpot($p);
         }
     }
     public function onJoin(PlayerJoinEvent $event){
-        if($this->plugin->isRunning() === true){
-        if($this->plugin->addPlayer($event->getPlayer)){
-            $this->plugin->arena->sendRandomSpot($event->getPlayer);
+        if($this->plugin->isRunning()){
+        if($this->plugin->addPlayer($event->getPlayer())){
+            KothMain::getInstance()->getPlugin()->sendRandomSpot($event->getPlayer());
         }
     }
     }
