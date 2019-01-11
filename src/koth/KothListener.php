@@ -35,7 +35,7 @@ class KothListener implements Listener{
     public function onJoin(PlayerJoinEvent $event){
         if($this->plugin->isRunning()){
         if($this->plugin->addPlayer($event->getPlayer())){
-            KothMain::getInstance()->getPlugin()->sendRandomSpot($event->getPlayer());
+            KothMain::getInstance()->getKothArena()->sendRandomSpot($event->getPlayer());
         }
     }
     }
