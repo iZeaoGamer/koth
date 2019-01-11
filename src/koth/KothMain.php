@@ -62,6 +62,10 @@ class KothMain extends PluginBase
     }
     public static function getInstance() : self{
         return self::$instance;
+    }
+    public static function getKothArena(): KothArena{
+        return $this->arena;
+    }
     public function getFaction(Player $player){
         return $this->fac == null ? "" : $this->fac->getPlayerFaction($player->getName());
     }
