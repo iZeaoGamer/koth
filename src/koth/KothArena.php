@@ -50,14 +50,11 @@ class KothArena
         $z = $l->getZ();
         $y = $l->getY();
         $p1 = $this->p1;
-        $p2= $this->p2;
-        $minx = (float)min($p1->getX(),$p2->getX());
-        $maxx = (float)max($p1->getX(),$p2->getX());
-        $minz = (float)min($p1->getZ(),$p2->getZ());
-        $maxz = (float)max($p1->getZ(),$p2->getZ());
-        $miny = (float)min($p1->getY(),$p2->getY());
-        $maxy = (float)max($p1->getY(),$p2->getY());
-        return ($minx <= $x && $x <= $maxx && $minz <= $z && $z <= $maxz && $miny <= $y && $y <= $maxy);
+        $p2 = $this->p2;
+       $minx = $p1->getX(),$p2->getX());
+        $minz = $p1->getZ(),$p2->getZ());
+        $miny = $p1->getY(),$p2->getY());
+        return ($minx <= $x && $minz <= $z && $miny <= $y);
     }
 
     public function preStart(){
@@ -117,7 +114,7 @@ class KothArena
 
     public function checkPlayers(){
         foreach ($this->players as $player => $time){
-            $p = $this->plugin->getServer()->getPlayer($player);
+            $p = $this->plugin->getServer()->getPlayerExact($player);
             if ($p instanceof Player){
                 if ($this->inCapture($p)){
                     $time = --$this->players[$player];
@@ -135,7 +132,7 @@ class KothArena
     public function won(Player $player){
         $prefix = $this->plugin->prefix();
         $msg = $this->plugin->getData("win");
-        $msg = str_replace("{player}",$player->getName(),$msg);
+        $msg = str_replace("{player}", "{faction}", $player->getName(), $main->getFaction($player->getName()),$msg);
         $msg = $prefix.$msg;
         $this->plugin->getServer()->broadcastMessage($msg);
         $this->giveRewards($player);
