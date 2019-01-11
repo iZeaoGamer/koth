@@ -105,7 +105,6 @@ class KothMain extends PluginBase
         return false;
     }
     public function sendToKoth(Player $player) : bool {
-         $player->transfer($this->getData("transfer"));
         $arena = $this->arena;
         if ($arena instanceof KothArena) {
             if ($arena->isRunning()){
