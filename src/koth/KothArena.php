@@ -5,31 +5,20 @@
  * Date: 6/22/17
  * Time: 9:56 AM
  */
-
 namespace koth;
-
-
 use pocketmine\command\ConsoleCommandSender;
 use pocketmine\level\Position;
 use pocketmine\Player;
 use pocketmine\scheduler\Task;
-
 class KothArena
 {
-
     private $running = false;
-
     private $players = [];
-
     private $spawns = [];
-
     private $p1;
     private $p2;
-
     public $plugin;
-
     private $timer = null;
-
     public function __construct(KothMain $main, $spawns, $capture)
     {
         $this->plugin = $main;
@@ -43,7 +32,6 @@ class KothArena
         $l = explode(":",$capture["p2"]);
         $this->p2 = new Position($l[0],$l[1],$l[2],$main->getServer()->getLevelByName($l[3]));
     }
-
     public function inCapture(Player $player) : bool {
         $l = $player->getPosition();
         $x = $l->getX();
@@ -51,12 +39,11 @@ class KothArena
         $y = $l->getY();
         $p1 = $this->p1;
         $p2 = $this->p2;
-       $minx = $p1->getX(),$p2->getX());
-        $minz = $p1->getZ(),$p2->getZ());
-        $miny = $p1->getY(),$p2->getY());
+       $minx = $p1->getX() and $p2->getX();
+        $minz = $p1->getZ() and $p2->getZ();
+        $miny = $p1->getY() and $p2->getY();
         return ($minx <= $x && $minz <= $z && $miny <= $y);
     }
-
     public function preStart(){
         $task = new PreGameTimer($this->plugin,$this);
         $handler = $this->plugin->getScheduler()->scheduleRepeatingTask($task,20);
@@ -64,25 +51,20 @@ class KothArena
         $this->timer = $task;
         $this->running = true;
     }
-
     public function startGame(){
         $task = new GameTimer($this->plugin,$this);
         $handler = $this->plugin->getScheduler()->scheduleRepeatingTask($task,20);
         $task->setHandler($handler);
         $this->timer = $task;
     }
-
-
     public function addPlayer(Player $player){
          $this->sendRandomSpot($player);
         $this->players[$player->getName()] = $this->plugin->getData("capture_time");
     }
-
     public function sendRandomSpot(Player $player){
         $spawn = array_rand($this->spawns);
         $player->teleport($this->spawns[$spawn]);
     }
-
     public function resetAllPlayers(){
         foreach ($this->players as $player => $time){
             $p = $this->plugin->getServer()->getPlayer($player);
@@ -92,13 +74,11 @@ class KothArena
             unset($this->players[$player]);
         }
     }
-
     public function resetCapture(Player $player){
         if (isset($this->players[$player->getName()])){
             $this->players[$player->getName()] = $this->plugin->getData("capture_time");
         }
     }
-
     public function resetGame(){
         $this->resetAllPlayers();
         $this->players = [];
@@ -107,11 +87,9 @@ class KothArena
         if ($timer instanceof Task && !$timer->getHandler()->isCancelled()) $timer->getHandler()->cancel();
         $this->timer = null;
     }
-
     public function isRunning() : bool {
         return $this->running;
     }
-
     public function checkPlayers(){
         foreach ($this->players as $player => $time){
             $p = $this->plugin->getServer()->getPlayerExact($player);
@@ -128,7 +106,6 @@ class KothArena
             }
         }
     }
-
     public function won(Player $player){
         $prefix = $this->plugin->prefix();
         $msg = $this->plugin->getData("win");
@@ -138,11 +115,9 @@ class KothArena
         $this->giveRewards($player);
         $this->endGame();
     }
-
     public function removePlayer(Player $player){
         if (isset($this->players[$player->getName()])) unset($this->players[$player->getName()]);
     }
-
     public function sendProgress(Player $player, $time){
         $tip = $this->plugin->getData("progress");
         $max = $this->plugin->getData("capture_time");
@@ -150,7 +125,6 @@ class KothArena
         $percent = (($time / $max)*100).'%';
         $player->sendTip(str_replace("{percent}",$percent,$tip));
     }
-
     public function endGame(){
         foreach ($this->players as $player => $time){
             $p = $this->plugin->getServer()->getPlayer($player);
@@ -162,14 +136,12 @@ class KothArena
         }
         $this->resetGame();
     }
-
     public function sendPopup($msg){
         foreach ($this->players as $player => $time){
             $p = $this->plugin->getServer()->getPlayer($player);
             if ($p instanceof Player) $p->sendPopup($msg);
         }
     }
-
     public function giveRewards(Player $player){
         $rewards = $this->plugin->getRewards();
         $name = $player->getName();
