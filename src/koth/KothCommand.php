@@ -18,7 +18,7 @@ class KothCommand extends Command
         $this->plugin = $main;
     }
     public function execute(CommandSender $sender, string $commandLabel, array $args): bool{
-        if ($sender instanceof Player && !$sender instanceof Player){
+        if ($sender instanceof Player or !$sender instanceof Player){
             if (isset($args[0])){
                 if (strtolower($args[0]) === "join"){
                      $this->plugin->getServer()->broadcastMessage("§5$sender §dhas joined KOTH. Game will be starting shortly..");
