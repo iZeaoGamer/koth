@@ -39,10 +39,13 @@ class KothArena
         $y = $l->getY();
         $p1 = $this->p1;
         $p2 = $this->p2;
-       $minx = $p1->getX() and $p2->getX();
-        $minz = $p1->getZ() and $p2->getZ();
-        $miny = $p1->getY() and $p2->getY();
-        return ($minx <= $x && $minz <= $z && $miny <= $y);
+       $minx = $p1->getX();
+       $maxx = $p2->getX();
+        $minz = $p1->getZ();
+        $maxz = $p2->getZ();
+        $miny = $p1->getY();
+        $maxy = $p2->getY();
+        return ($minx <= $x && $x <= $maxx && $minz <= $z && $z <= $maxz && $miny <= $y && $y <= $maxy);
     }
     public function preStart(){
         $task = new PreGameTimer($this->plugin,$this);
