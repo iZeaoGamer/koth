@@ -86,7 +86,9 @@ class KothCommand extends Command
                     return true;
                 }
             }
-            $sender->sendMessage("Error- Cant run that in console!");
+           if($sender instanceof Player){
+               $this->sendHelp($sender);
+               return true;
         }
         return true;
         }
